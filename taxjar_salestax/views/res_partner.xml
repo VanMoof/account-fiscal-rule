@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_partner_property_form" model="ir.ui.view">
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="account.view_partner_property_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group/group/div[hasclass('o_address_format')]/../.." position="inside">
+                <group name="taxjar_validation_failed"
+                       attrs="{'invisible': [('taxjar_validation_error', '=', False)]}">
+                    <field name="taxjar_validation_error" invisible="1"/>
+                    <button name="taxjar_validate_address" string="Retry TaxJar Address Validation" type="object"
+                            class="btn-link" icon="fa-exclamation-triangle"/>
+                </group>
+            </xpath>
+            <group name="accounting_entries" position="after">
+                <group string="Taxjar">
+                    <button name="taxjar_validate_address" string="Validate Address" type="object" colspan="2"/>
+                </group>
+            </group>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_taxjar_config_manager,TaxJar config manager,model_taxjar_config,account.group_account_manager,1,1,1,1
+access_taxjar_product_code_employee,Taxjar product code,model_taxjar_product_code,base.group_user,1,0,0,0
+access_taxjar_product_code_manager,Taxjar product code manager,model_taxjar_product_code,account.group_account_manager,1,1,1,1
