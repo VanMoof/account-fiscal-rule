@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_taxjar_config_form" model="ir.ui.view">
+        <field name="name">taxjar.config.form</field>
+        <field name="model">taxjar.config</field>
+        <field name="arch" type="xml">
+            <form string="TaxJar API" version="7.0">
+                <header>
+                    <button name="test" string="Test Connection" type="object" icon="fa-handshake-o"/>
+                    <button name="import_categories" string="Update Product Codes" type="object" icon="fa-refresh"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group name="account" string="Account" colspan="4" cols="2">
+                            <field name="company_id"/>
+                            <field name="api_key" password="True"/>
+                        </group>
+                        <group name="options" string="Options">
+                            <field name="address_validation"/>
+                            <field name="enable_tax_calculation"/>
+                            <field name="enable_tax_reporting"/>
+                        </group>
+                        <group name="technical" string="Technical">
+                            <field name="sandbox"/>
+                            <field name="logging"/>
+                            <field name="request_timeout"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group name="countries" string="Countries">
+                            <field name="country_ids" nolabel="1" options="{'no_create': True}"/>
+                        </group>
+                        <group name="shipping_products" string="Shipping Products">
+                            <field name="shipping_product_ids" nolabel="1">
+                                <tree>
+                                    <field name="default_code"/>
+                                    <field name="name"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_taxjar_config_tree" model="ir.ui.view">
+        <field name="name">taxjar.config.tree</field>
+        <field name="model">taxjar.config</field>
+        <field name="arch" type="xml">
+            <tree string="TaxJar API">
+                <field name="company_id"/>
+                <field name="sandbox"/>
+		<field name="enable_tax_calculation"/>
+		<field name="enable_tax_reporting"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_taxjar_config" model="ir.actions.act_window">
+        <field name="name">TaxJar API</field>
+        <field name="res_model">taxjar.config</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_taxjar"
+              name="TaxJar"
+              parent="account.menu_finance_configuration"
+              sequence="150"/>
+
+    <menuitem action="action_taxjar_config"
+              id="menu_taxjar_config"
+              name="TaxJar API"
+              parent="menu_taxjar"
+              sequence="10"/>
+
+</odoo>

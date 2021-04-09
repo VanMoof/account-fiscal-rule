@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- The taxjar_amount field needs to be present for onchange methods -->
+    <record id="invoice_form" model="ir.ui.view">
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='price_unit']" position="before">
+                <field name="taxjar_amount" readonly="1"
+                       attrs="{'column_invisible': [('parent.taxjar_applies', '=', False)]}"/>
+            </xpath>
+            <xpath expr="//page[@name='other_info']/group/group/field[@name='move_id']/.." position="after">
+                <group string="TaxJar" attrs="{'invisible': [('taxjar_applies', '=', False)]}">
+                    <field name="taxjar_applies" invisible="1"/>
+                    <field name="taxjar_amount" invisible="1"/>
+                    <field name="warehouse_id" options="{'no_create': True}"/>
+                </group>
+            </xpath>
+            <field name="amount_total" position="after">
+                <td style="width: 50%"/>
+                <button name="button_update_taxjar_taxes"
+                        attrs="{'invisible': ['|', '&amp;', ('taxjar_applies', '=', False), ('taxjar_amount', '=', 0), ('state', '!=', 'draft')]}"
+                        string="Update from TaxJar"
+                        class="btn-link"
+                        type="object"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>
