@@ -9,7 +9,7 @@
         <record id="account_tax_taxjar" model="account.tax">
             <field name="name">TaxJar</field>
             <field eval="0.0" name="amount"/>
-            <field name="type">percent</field>
+            <field name="amount_type">percent</field>
             <field name="type_tax_use">sale</field>
             <field name="description">Sales tax</field>
         </record>
